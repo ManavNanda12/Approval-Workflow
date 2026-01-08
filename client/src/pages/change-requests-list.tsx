@@ -45,7 +45,7 @@ interface ProductChangeRequest {
 }
 
 const mockData: ProductChangeRequest[] = [
-  { id: 1276, name: "Jack Daniel's Single Barrel", totalItems: 8, pendingItems: 3, approvedItems: 4, rejectedItems: 1, needsReview: false },
+  { id: 1276, name: "Jack Daniel's Single Barrel", totalItems: 10, pendingItems: 3, approvedItems: 4, rejectedItems: 1, needsReview: false },
   { id: 1280, name: "Johnnie Walker Blue Label", totalItems: 5, pendingItems: 2, approvedItems: 2, rejectedItems: 1, needsReview: true },
   { id: 1283, name: "Macallan 18 Year", totalItems: 6, pendingItems: 0, approvedItems: 5, rejectedItems: 1, needsReview: false },
   { id: 1290, name: "Grey Goose Vodka", totalItems: 4, pendingItems: 4, approvedItems: 0, rejectedItems: 0, needsReview: false },

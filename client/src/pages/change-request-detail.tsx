@@ -35,6 +35,8 @@ const productData: Record<number, { name: string; changes: FieldChange[] }> = {
   1276: {
     name: "Jack Daniel's Single Barrel",
     changes: [
+      { id: 100, fieldName: "Thumbnail Image", currentValue: "https://imgs.search.brave.com/lSXkT-ZHuutw_ZHXQoZdwDEFfuXYTRRayS6EzZFApkc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNTI2/NTU2NzI2L3Bob3Rv/L2JvdHRsZS1vZi1q/YWNrLWRhbmllbHMt/Ym91cmJvbi5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9Yjlt/dEcxdmFuZ1RHSnFt/Z0hlZ0tpUGQ3MHY0/MGJzLU5jbnVPVFZF/dUUtZz0", proposedValue: "https://imgs.search.brave.com/JXBe3B-GrpOfH_gX9Ywf1M-7szR_zBSK2AB_1SqZto0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE2/OTI3MTM0NjMzMDkt/ZmM2YjlhNDNhMjI2/P2ZtPWpwZyZxPTYw/Jnc9MzAwMCZpeGxp/Yj1yYi00LjEuMCZp/eGlkPU0zd3hNakEz/ZkRCOE1IeHpaV0Z5/WTJoOE1UUjhmR3Bo/WTJzbE1qQmtZVzVw/Wld4emZHVnVmREI4/ZkRCOGZId3c", status: "pending" },
+      { id: 101, fieldName: "Main Image", currentValue: "https://imgs.search.brave.com/9rPlSjLxObYt8YLi2Fu0k5kZ3eJ6PPHBrBA_IMShBW8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by9qYWNrLWRh/bmllbHMtd2hpc2t5/LWJvdHRsZS13b29k/LTI2MG53LTE5MDEy/NzM2NTAuanBn", proposedValue: "https://imgs.search.brave.com/9FDPzRUGqhIPahiiugMNBA4Y8Q2M5mjJf3dqvVdPOqM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FhLzlh/L2NjL2FhOWFjY2U5/MjJjNDQ0ODc2YTkz/YjVlOGQ1ZmFjNjk0/LmpwZw", status: "pending" },
       { id: 1, fieldName: "Product Name", currentValue: "Jack Daniel's Single Barrel", proposedValue: "Jack Daniel's Single Barrel Select", status: "pending" },
       { id: 2, fieldName: "Volume", currentValue: "750ml", proposedValue: "700ml", status: "approved" },
       { id: 3, fieldName: "ABV", currentValue: "45%", proposedValue: "47%", status: "pending" },
@@ -50,6 +52,8 @@ const productData: Record<number, { name: string; changes: FieldChange[] }> = {
 const defaultProduct = {
   name: "Sample Product",
   changes: [
+    { id: 100, fieldName: "Thumbnail Image", currentValue: "https://via.placeholder.com/80x60?text=Old+Thumb", proposedValue: "https://via.placeholder.com/80x60?text=New+Thumb", status: "pending" },
+    { id: 101, fieldName: "Main Image", currentValue: "https://via.placeholder.com/400x300?text=Old+Main", proposedValue: "https://via.placeholder.com/400x300?text=New+Main", status: "pending" },
     { id: 1, fieldName: "Product Name", currentValue: "Sample Product", proposedValue: "Updated Product Name", status: "pending" as const },
     { id: 2, fieldName: "Price", currentValue: "$29.99", proposedValue: "$34.99", status: "pending" as const },
     { id: 3, fieldName: "Description", currentValue: "Original description", proposedValue: "New improved description", status: "approved" as const },
@@ -226,9 +230,17 @@ export default function ChangeRequestDetail() {
                     </TableCell>
                     <TableCell>
                       <div className="max-w-[200px]">
-                        <p className="text-muted-foreground truncate" title={change.currentValue} data-testid={`text-current-value-${change.id}`}>
-                          {change.currentValue}
-                        </p>
+                        {change.fieldName.toLowerCase().includes("image") ? (
+                          <img
+                            src={change.currentValue}
+                            alt="Current"
+                            className={change.fieldName === "Thumbnail Image" ? "w-16 h-12 object-cover rounded border" : "w-32 h-24 object-cover rounded border"}
+                          />
+                        ) : (
+                          <p className="text-muted-foreground truncate" title={change.currentValue} data-testid={`text-current-value-${change.id}`}>
+                            {change.currentValue}
+                          </p>
+                        )}
                       </div>
                     </TableCell>
                     <TableCell>
@@ -236,9 +248,17 @@ export default function ChangeRequestDetail() {
                     </TableCell>
                     <TableCell>
                       <div className="max-w-[200px]">
-                        <p className={`truncate ${change.status === "approved" ? "text-green-700 font-medium" : change.status === "rejected" ? "text-red-700 line-through" : "text-foreground font-medium"}`} title={change.proposedValue} data-testid={`text-proposed-value-${change.id}`}>
-                          {change.proposedValue}
-                        </p>
+                        {change.fieldName.toLowerCase().includes("image") ? (
+                          <img
+                            src={change.proposedValue}
+                            alt="Proposed"
+                            className={change.fieldName === "Thumbnail Image" ? "w-16 h-12 object-cover rounded border" : "w-32 h-24 object-cover rounded border"}
+                          />
+                        ) : (
+                          <p className={`truncate ${change.status === "approved" ? "text-green-700 font-medium" : change.status === "rejected" ? "text-red-700 line-through" : "text-foreground font-medium"}`} title={change.proposedValue} data-testid={`text-proposed-value-${change.id}`}>
+                            {change.proposedValue}
+                          </p>
+                        )}
                       </div>
                     </TableCell>
                     <TableCell className="text-center" data-testid={`status-${change.id}`}>
