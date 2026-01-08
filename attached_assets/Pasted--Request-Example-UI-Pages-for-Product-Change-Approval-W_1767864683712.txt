@@ -1,0 +1,101 @@
+
+### Request: Example UI Pages for Product Change Approval Workflow
+
+I need an **example HTML-based UI** to demonstrate a product change approval workflow. This is only for **visual and UX reference**, not functional backend integration.
+
+---
+
+## Page 1: Simple Product Selector Page
+
+Create a **very simple list page** that contains:
+
+* A list of product names with their IDs
+  Example:
+
+  * Product Name: *Jack Daniel’s Single Barrel* (ID: 1276)
+  * Product Name: *Sample Product B* (ID: 1280)
+
+### Behavior
+
+* Each product name should be **clickable**
+* On click, navigate to **Page 2 (Product Change List Page)**
+
+This page is only meant to act as a **starting entry point**.
+
+---
+
+## Page 2: Product Change Requests – Product List View
+
+This page shows a **list of products with change request summary information**.
+
+### Table Columns
+
+Each row represents one product and should include:
+
+* Checkbox (at the start of the row)
+* Product Name
+* Total Items
+* Pending Items
+* Approved Items
+* Rejected Items
+* Needs Review (Yes / No)
+
+### Bulk Action Rules
+
+* Multiple products can be selected using checkboxes
+* **Approve All / Reject All** actions should be enabled **only when**:
+
+  * `PendingItems > 0`
+  * `NeedsReview = false`
+* If `NeedsReview = true`, bulk approve/reject should be disabled for that product
+
+---
+
+### Filters (Top of Page)
+
+Add simple filters above the table:
+
+* Filter by:
+
+  * Needs Review = Yes / No
+  * Pending Items > 0
+* Optional: Search by product name
+
+---
+
+### Row Interaction
+
+* Clicking on a **product row (or a View button)** should navigate to **Page 3 (Product Change Request Detail Page)**
+
+---
+
+## Page 3: Product Change Request Detail Page
+
+This page is already **designed and finalized** (I will provide the design separately).
+
+### Purpose
+
+* Show field-level change details for a single product
+* Allow:
+
+  * Approve / Reject per field
+  * Approve All Pending
+  * Reject All Pending
+* Display:
+
+  * Current Value vs Proposed Value
+  * Status (Pending / Approved / Rejected)
+
+You can use the attached screenshot as the **visual reference** for this page.
+
+---
+
+## Notes
+
+* This is a **static example UI** for demonstration only
+* Dummy data is acceptable
+* Focus on **layout, interaction flow, and clarity**
+* No backend logic required
+
+---
+
