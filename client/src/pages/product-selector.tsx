@@ -41,6 +41,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { navigate } from "wouter/use-browser-location";
 
 export default function ProductSelector() {
   const [search, setSearch] = useState("");
@@ -325,7 +326,7 @@ export default function ProductSelector() {
                             variant="ghost"
                             size="sm"
                             className="gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                            // onClick={() => ...} // Add navigation if needed
+                              onClick={() => navigate(`/change-requests/${item.id}`)}
                             data-testid={`button-broker-view-${item.id}`}
                           >
                             <Eye className="w-4 h-4" />
